@@ -53,8 +53,21 @@ form.addEventListener('submit', async event => {
 
     createGallery(data.hits);
 
-    showLoadMoreButton();
+    const totalPages = Math.ceil(data.totalHits / 15);
+
+    if (page < totalPages) {
+        showLoadMoreButton();
+    } else {
+        hideLoadMoreButton();
+        iziToast.info({
+          message:
+            "We're sorry, but you've reached the end of search results.",
+        });
+    }
   } catch (error) {
+    iziToast.error({
+      message: 'Something went wrong. Please try again later.',
+    });
     console.log(error);
   } finally {
     hideLoader();
@@ -63,6 +76,8 @@ form.addEventListener('submit', async event => {
 
 loadMoreBtn.addEventListener('click', async () => {
   page += 1;
+
+  hideLoadMoreButton();
 
   try {
     showLoader();
@@ -98,5 +113,7 @@ loadMoreBtn.addEventListener('click', async () => {
         message: 'Something went wrong. Please try again later.',
         });
         console.log(error);
+    } finally {
+    hideLoader();
   }
 });
