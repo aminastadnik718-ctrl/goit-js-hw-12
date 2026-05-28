@@ -82,8 +82,11 @@ loadMoreBtn.addEventListener('click', async () => {
 
     const totalPages = Math.ceil(data.totalHits / 15);
 
-    if (page >= totalPages) {
-      hideLoadMoreButton();
+    if (page < totalPages) {
+      showLoadMoreButton();
+    } else {
+      hideLoadMoreButton(
+      );
 
       iziToast.info({
         message:
@@ -91,8 +94,9 @@ loadMoreBtn.addEventListener('click', async () => {
       });
     }
   } catch (error) {
-    console.log(error);
-  } finally {
-    hideLoader();
+    iziToast.error({
+        message: 'Something went wrong. Please try again later.',
+        });
+        console.log(error);
   }
 });
