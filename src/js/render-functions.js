@@ -12,6 +12,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 const lightbox = new SimpleLightbox('.gallery a');
 
+
 export function createGallery(images) {
   const markup = images
     .map(image => {
@@ -23,6 +24,28 @@ export function createGallery(images) {
             alt="${image.tags}"
           />
         </a>
+
+        <div class="info">
+          <p>
+            <b>Likes</b>
+            ${image.likes}
+          </p>
+
+          <p>
+            <b>Views</b>
+            ${image.views}
+          </p>
+
+          <p>
+            <b>Comments</b>
+            ${image.comments}
+          </p>
+
+          <p>
+            <b>Downloads</b>
+            ${image.downloads}
+          </p>
+        </div>
       </li>
     `;
     })
